@@ -1,0 +1,45 @@
+version: '2'
+
+volumes:
+  mysql-data:
+    driver: local
+
+services:
+  db:
+    image: mysql
+    container_name: db-mysql
+    volumes:
+      - mysql-data:/var/lib/mysql/
+    environment:
+      MYSQL_DATABASE: october
+      MYSQL_USER: october
+      MYSQL_PASSWORD: october
+      MYSQL_ROOT_PASSWORD: october
+  apache:
+    image: ambientum/php:7.0-apache
+    container_name: october-apache
+    volumes:
+      - ./october:/var/www/app/public
+    links:
+      - db:mysql
+  node:
+    image: ambientum/node:7
+    container_name: front-nodec
+    command: npm run dev
+    volumes:
+      - ./frontend:/var/www/app
+    ports:
+      - 3000:3000
+  app:
+    image: zzrot/alpine-caddy
+    container_name: proxy-app
+    ports:
+        - 80:80
+    volumes:
+        - ./Caddyfile:/etc/Caddyfile
+    links:
+      - apache:apache
+      - node:node
+    depends_on:
+      - node
+      - apache

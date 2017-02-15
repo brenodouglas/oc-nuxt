@@ -1,0 +1,33 @@
+
+*:80 {
+  tls off
+  root /var/www/app/public
+  log stdout
+  errors stderr
+
+  proxy / node:3000 {
+    except /modules /plugins /storage /admin /backend
+    transparent
+  }
+
+  proxy /modules apache:8080 {
+    transparent
+  }
+
+  proxy /plugins apache:8080 {
+    transparent
+  }
+
+  proxy /storage apache:8080 {
+    transparent
+  }
+
+  proxy /admin apache:8080 {
+    transparent
+  }
+
+  proxy /backend apache:8080 {
+    transparent
+  }
+
+}
