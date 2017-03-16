@@ -1,2 +1,8 @@
-*vendor/**
-*node_modules/**
+**vendor/**
+composer.phar
+.DS_Store
+.idea
+.env
+.env.*.php
+.env.php
+.phpintel/

@@ -28,6 +28,8 @@ services:
     command: npm run dev
     volumes:
       - ./frontend:/var/www/app
+    links:
+      - apache:apache
     ports:
       - 3000:3000
   app:

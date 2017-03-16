@@ -7,17 +7,27 @@
     <h2 class="info" v-if="name === 'client'">
       Please refresh the page
     </h2>
+
+    <ul>
+      <li v-for="category in data">
+        {{category.id}} - {{category.name}}
+      </li>
+    </ul>
+
     <nuxt-link class="button" to="/">
       Home page
     </nuxt-link>
   </section>
 </template>
 <script>
+import axios from 'axios'
+
 export default {
   data ({ req }) {
-    return {
-      name: req ? 'server' : 'client'
-    }
+    return axios.get(`http://localhost:3000/proxy/api/v1/category`)
+    .then((res) => {
+      return { name: req ? 'server' : 'client', data: res.data }
+    })
   },
   head () {
     return {

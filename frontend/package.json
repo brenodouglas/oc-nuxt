@@ -5,6 +5,9 @@
   "author": "Breno Douglas <breno.douglas@paieterno.com.br>",
   "private": true,
   "dependencies": {
+    "axios": "^0.15.3",
+    "cors": "^2.8.1",
+    "express-http-proxy": "^0.11.0",
     "nuxt": "latest"
   },
   "scripts": {
