@@ -25,6 +25,11 @@ export default {
   data ({ req }) {
     return { name: req ? 'server' : 'client' }
   },
+  methods() {
+      return {
+          
+      }
+  }
   head () {
     return {
       title: `About Page (${this.name}-side)`
